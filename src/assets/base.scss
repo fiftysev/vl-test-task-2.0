@@ -1,3 +1,5 @@
+@import './vars.scss';
+
 *,
 *::before,
 *::after {
@@ -5,7 +7,6 @@
   margin: 0;
   position: relative;
   font-weight: normal;
-  color-scheme: dark;
 }
 
 body {
@@ -17,4 +18,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: $backgroundColor;
+  color: $textColor;
 }
+
