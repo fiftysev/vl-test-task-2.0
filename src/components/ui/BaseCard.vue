@@ -1,0 +1,19 @@
+<script setup lang="ts"></script>
+
+<template>
+  <div class="card">
+    <slot />
+  </div>
+</template>
+
+<style scoped lang="scss">
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  background-color: $lightBackgroundColor;
+  padding: 1rem;
+  border: 1px solid lighten($color: $textColor, $amount: 50%);
+}
+</style>

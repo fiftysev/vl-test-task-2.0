@@ -7,7 +7,7 @@ defineProps<InputGroupProps>();
 </script>
 <template>
   <div class="input-group">
-    <h3 class="heading" v-if="heading">{{ heading }}</h3>
+    <h4 class="heading" v-if="heading">{{ heading }}</h4>
     <slot></slot>
   </div>
 </template>
