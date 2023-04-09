@@ -9,3 +9,5 @@ export type Task = {
 
 export type TaskPriority = 'Low' | 'Medium' | 'High';
 export type TaskTag = 'Design' | 'Development' | 'Research';
+
+export type SortOrder = 'ASC' | 'DESC';

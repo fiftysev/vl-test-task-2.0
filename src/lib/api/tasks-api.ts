@@ -12,13 +12,14 @@ export class TasksApiService {
         const taskUid = uid();
         return {
           uid: taskUid,
-          title: `Task ${Math.floor(Math.random() * this.ID_SEED)}`,
+          title: `Задача ${Math.floor(Math.random() * this.ID_SEED)}`,
           createdAt: getRandomDateInThisYear(),
           priority: pickRandomElement(['Low', 'Medium', 'High']),
-          tags: ['Design']
+          tags: [pickRandomElement(['Development', 'Design', 'Research'])]
         } as Task;
       });
   }
+  
   static async getTasks(count: number = 15): Promise<Task[]> {
     return new Promise((resolve) => {
       setTimeout(() => {
