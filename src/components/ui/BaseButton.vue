@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import type { ButtonHTMLAttributes } from 'vue';
 
-
 export interface ButtonProps extends ButtonHTMLAttributes {
   variant: 'primary' | 'success' | 'error';
-};
+}
 
 defineProps<ButtonProps>();
 </script>
@@ -22,10 +21,12 @@ defineProps<ButtonProps>();
   min-height: 2rem;
   cursor: pointer;
 
-  color: $backgroundColor;
+  color: #fff;
   font-weight: bold;
 
-  padding: .5rem 1rem;
+  padding: 1rem;
+
+  border-radius: 0.25rem;
 
   &.primary {
     background-color: $primaryColor;

@@ -1,10 +1,33 @@
 <script setup lang="ts">
 import {
+  BaseButton,
   BaseCheckbox,
   BaseInputGroup,
   BaseRadioButton,
   BaseCard
 } from '@/components/ui';
+
+import TaskList from '@/components/task/TaskList/TaskList.vue';
+import { Suspense, onMounted, reactive } from 'vue';
+import type { Task } from '@/model/task';
+import { TasksApiService } from '@/lib/api/tasks-api';
+
+const tasksObserver = new IntersectionObserver((entries) => {
+  entries.forEach(async (entry) => {
+    if (entry.isIntersecting) {
+      console.log('Loading new');
+      taskData.push(...(await TasksApiService.getTasks()));
+    }
+  });
+});
+
+let taskData = reactive<Task[]>([]);
+
+onMounted(async () => {
+  taskData.push(...(await TasksApiService.getTasks()));
+  tasksObserver.observe(document.querySelector('.listend')!);
+});
+
 </script>
 
 <template>
@@ -18,17 +41,22 @@ import {
       </base-card>
       <base-card>
         <base-input-group heading="Приоритет">
-          <base-checkbox label="Low"/>
-          <base-checkbox label="Normal"/>
-          <base-checkbox label="High"/>
+          <base-checkbox label="Low" />
+          <base-checkbox label="Normal" />
+          <base-checkbox label="High" />
         </base-input-group>
         <base-input-group heading="Отметка">
-          <base-checkbox label="Research"/>
-          <base-checkbox label="Design"/>
-          <base-checkbox label="Development"/>
+          <base-checkbox label="Research" />
+          <base-checkbox label="Design" />
+          <base-checkbox label="Development" />
         </base-input-group>
       </base-card>
     </aside>
+    <section class="content">
+      <base-button variant="primary" style="margin-bottom: 1rem">Добавить задачу</base-button>
+      <task-list :list-data="taskData" />
+      <span class="listend"></span>
+    </section>
   </main>
 </template>
 
@@ -44,10 +72,16 @@ import {
 
   .menu {
     position: sticky;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    position: -webkit-sticky;
+    top: 1rem;
+    height: 100vh;
+
+    @include stack;
+  }
+
+  .listend {
+    width: 0;
+    height: 0;
   }
 }
 </style>

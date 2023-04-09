@@ -14,10 +14,8 @@ defineProps<InputGroupProps>();
 
 <style scoped lang="scss">
 .input-group {
-  display: flex;
-  flex-direction: column;
+  @include stack;
   align-items: start;
-  gap: 1rem;
 
   .heading {
     text-transform: uppercase;
