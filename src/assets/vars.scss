@@ -11,3 +11,9 @@ $errorColor: #F38181;
     flex-direction: column;
     gap: 1rem;
 }
+
+@mixin row {
+    display: flex;
+    align-items: center;
+    gap: 1rem
+}

@@ -10,9 +10,9 @@ defineProps<TaskListItemProps>();
 </script>
 
 <template>
-  <base-card class="task-card">
+  <base-card class="task-card" @click="() =>$router.push(`/task/${task.uid}`)">
     <h2 class="heading">{{ task.title }}</h2>
-    <p>Создано: {{ formatter.format(task.createdAt) }}</p>
+    <p>Создано: {{ formatter.format(Date.parse(task.createdAt)) }}</p>
     <p>Приоритет: {{ task.priority }}</p>
     <p>Отметки: {{ task.tags.join(",") }}</p>
   </base-card>

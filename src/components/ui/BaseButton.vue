@@ -2,10 +2,12 @@
 import type { ButtonHTMLAttributes } from 'vue';
 
 export interface ButtonProps extends ButtonHTMLAttributes {
-  variant: 'primary' | 'success' | 'error';
+  variant: 'ghost' | 'primary' | 'success' | 'error';
 }
 
-defineProps<ButtonProps>();
+withDefaults(defineProps<ButtonProps>(), {
+  variant: 'ghost'
+});
 </script>
 
 <template>
@@ -27,6 +29,12 @@ defineProps<ButtonProps>();
   padding: 1rem;
 
   border-radius: 0.25rem;
+
+  &.ghost {
+    background-color: $lightBackgroundColor;
+    color: $textColor;
+    border: 1px solid lighten($color: $textColor, $amount: 50%); 
+  }
 
   &.primary {
     background-color: $primaryColor;
