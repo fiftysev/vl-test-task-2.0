@@ -21,8 +21,12 @@ const handleInput = (e: Event) => emit('update:modelValue', (e.target as HTMLInp
 <style scoped lang="scss">
 .textarea {
   width: 100%;
-  min-width: 320px;
+  min-width: 40%;
   padding: 1rem;
+
+  @media only screen and (max-width: 600px){ 
+    width: 100%; 
+  }
 
   border: 1px solid lighten($color: $textColor, $amount: 50%);
   border-radius: 0.25rem;

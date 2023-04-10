@@ -30,7 +30,11 @@ const handleInput = (e: Event) => {
 <style lang="scss">
 .select {
   min-height: 2.5rem;
-  min-width: 320px;
+  min-width: 40%;
+
+  @media only screen and (max-width: 600px){ 
+    width: 100%; 
+  }
 
   border: 1px solid lighten($color: $textColor, $amount: 50%);
   border-radius: 0.25rem;
