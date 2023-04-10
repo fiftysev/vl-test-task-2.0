@@ -13,7 +13,7 @@ export class TasksApiService {
         return {
           uid: taskUid,
           title: `Задача ${Math.floor(Math.random() * this.ID_SEED)}`,
-          createdAt: getRandomDateInThisYear(),
+          createdAt: getRandomDateInThisYear().toString(),
           priority: pickRandomElement(['Low', 'Medium', 'High']),
           tags: [pickRandomElement(['Development', 'Design', 'Research'])]
         } as Task;
@@ -23,7 +23,7 @@ export class TasksApiService {
   static async getTasks(count: number = 15): Promise<Task[]> {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(this.generator(count));
+        resolve(this.generator(count))
       }, 500);
     });
   }

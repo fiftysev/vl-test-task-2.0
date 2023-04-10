@@ -30,11 +30,11 @@ task = store.getTaskByUid(uid as string);
 
 <template>
   <div class="button-row">
-    <div class="button-group">
-      <base-button @click="onBackClick">Назад</base-button>
-      <base-button variant="primary" @click="onEditClick">Редактировать задачу</base-button>
+    <base-button @click="onBackClick">Назад</base-button>
+    <div class="action-buttons">
+      <base-button variant="primary" @click="onEditClick">Редактировать</base-button>
+      <base-button variant="error" @click="onDeleteClick">Удалить</base-button>
     </div>
-    <base-button variant="error" @click="onDeleteClick">Удалить задачу</base-button>
   </div>
   <base-card class="task-card">
     <base-input-group heading="Название">
@@ -68,9 +68,9 @@ p {
 .button-row {
   @include row;
   justify-content: space-between;
-}
-
-.button-group {
-  @include row;
+  
+  .action-buttons {
+    @include row;
+  }
 }
 </style>

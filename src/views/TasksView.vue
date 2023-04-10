@@ -3,7 +3,7 @@ import { BaseButton } from '@/components/ui';
 
 import TaskFilterPanel from '@/components/task/TaskFilterPanel.vue';
 import TaskList from '@/components/task/TaskList/TaskList.vue';
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { useTasksStore } from '@/stores/tasks';
 
 const store = useTasksStore();
@@ -19,6 +19,8 @@ const tasksObserver = new IntersectionObserver((entries) => {
 onMounted(async () => {
   tasksObserver.observe(document.querySelector('.list-end')!);
 });
+
+onUnmounted(() => tasksObserver.disconnect());
 </script>
 
 <template>
@@ -27,7 +29,13 @@ onMounted(async () => {
       <task-filter-panel />
     </aside>
     <section class="content">
-      <base-button variant="primary" style="margin-bottom: 1rem">Добавить задачу</base-button>
+      <base-button
+        class="add-button"
+        variant="primary"
+        style="margin-bottom: 1rem"
+        @click="() => $router.push('/add-task')"
+        >Добавить задачу</base-button
+      >
       <task-list :list-data="store.tasks" />
       <span class="list-end"></span>
     </section>
@@ -42,14 +50,22 @@ onMounted(async () => {
 
   @media only screen and (max-width: 600px) {
     grid-template-columns: auto;
+
+    .add-button {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    .menu {
+      position: sticky;
+      position: -webkit-sticky;
+      top: 1rem;
+      height: 100vh;
+    }
   }
 
   .menu {
-    position: sticky;
-    position: -webkit-sticky;
-    top: 1rem;
-    height: 100vh;
-
     @include stack;
   }
 
