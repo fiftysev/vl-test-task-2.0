@@ -1,19 +1,19 @@
 $backgroundColor: #f5f3f3;
 $lightBackgroundColor: #fcfcfc;
-$textColor: #2C3639;
+$textColor: #2c3639;
 
-$primaryColor: #6096B4;
-$successColor: #99DDCC;
-$errorColor: #F38181;
+$primaryColor: #6096b4;
+$successColor: #99ddcc;
+$errorColor: #f38181;
 
 @mixin stack {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 @mixin row {
-    display: flex;
-    align-items: center;
-    gap: 1rem
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

@@ -32,8 +32,8 @@ const handleInput = (e: Event) => {
   min-height: 2.5rem;
   min-width: 40%;
 
-  @media only screen and (max-width: 600px){ 
-    width: 100%; 
+  @media only screen and (max-width: 600px) {
+    width: 100%;
   }
 
   border: 1px solid lighten($color: $textColor, $amount: 50%);

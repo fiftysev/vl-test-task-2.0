@@ -16,7 +16,7 @@ defineProps<InputGroupProps>();
 .input-group {
   @include stack;
   align-items: start;
-  gap: .5rem;
+  gap: 0.5rem;
 
   .heading {
     text-transform: uppercase;

@@ -18,7 +18,13 @@ const handleInput = (e: Event) => emit('update:modelValue', (e.target as HTMLInp
 <template>
   <div class="input-container">
     <label v-if="label" :for="label">{{ label }}</label>
-    <input class="input" :name="label ?? 'input'" v-bind="$attrs" @input="handleInput" :value="modelValue"/>
+    <input
+      class="input"
+      :name="label ?? 'input'"
+      v-bind="$attrs"
+      @input="handleInput"
+      :value="modelValue"
+    />
   </div>
 </template>
 
@@ -28,7 +34,7 @@ const handleInput = (e: Event) => emit('update:modelValue', (e.target as HTMLInp
   .input {
     min-height: 2.5rem;
     border: 1px solid lighten($color: $textColor, $amount: 50%);
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     color: $textColor;
     width: 100%;
   }

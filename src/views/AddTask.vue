@@ -5,7 +5,7 @@ const store = useTasksStore();
 </script>
 
 <template>
-  <task-form :on-submit="store.addNewTask"/>
+  <task-form :on-submit="store.addNewTask" />
 </template>
 
 <style scoped lang="scss"></style>

@@ -14,7 +14,14 @@ const handleInput = (e: Event) => emit('update:modelValue', (e.target as HTMLInp
 </script>
 <template>
   <div class="input-container">
-    <input type="radio" class="radio-btn" name="radio" v-bind="$attrs" @input="handleInput" :checked="modelValue === $attrs.value"/>
+    <input
+      type="radio"
+      class="radio-btn"
+      name="radio"
+      v-bind="$attrs"
+      @input="handleInput"
+      :checked="modelValue === $attrs.value"
+    />
     <label v-if="label" for="radio">{{ label }}</label>
   </div>
 </template>

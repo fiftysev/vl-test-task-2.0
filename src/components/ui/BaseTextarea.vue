@@ -24,8 +24,8 @@ const handleInput = (e: Event) => emit('update:modelValue', (e.target as HTMLInp
   min-width: 40%;
   padding: 1rem;
 
-  @media only screen and (max-width: 600px){ 
-    width: 100%; 
+  @media only screen and (max-width: 600px) {
+    width: 100%;
   }
 
   border: 1px solid lighten($color: $textColor, $amount: 50%);

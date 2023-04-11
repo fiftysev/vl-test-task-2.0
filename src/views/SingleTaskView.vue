@@ -68,7 +68,7 @@ p {
 .button-row {
   @include row;
   justify-content: space-between;
-  
+
   .action-buttons {
     @include row;
   }

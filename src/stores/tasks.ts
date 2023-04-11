@@ -2,15 +2,19 @@ import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 import { TasksApiService } from '@/lib/api/tasks-api';
 import { uid } from 'uid';
-import type { SortOrder, Task, TaskDto } from '@/model/task';
+import type { SortOrder, Task, TaskDto, TaskPriority, TaskTag } from '@/model/task';
 
 export const useTasksStore = defineStore('tasks', () => {
   const _tasks = ref<Task[]>([]);
+
   const sortOrder = ref<SortOrder>('DESC');
+  const priorityFilters = ref<TaskPriority[]>(['Low', 'Medium', 'High']);
+  const tagsFilters = ref<TaskTag[]>(['Design', 'Development', 'Research']);
 
   async function loadNewTasks() {
     _tasks.value.push(...(await TasksApiService.getTasks()));
   }
+
   function addNewTask(newTask: TaskDto) {
     _tasks.value.push(
       Object.assign(
@@ -19,7 +23,8 @@ export const useTasksStore = defineStore('tasks', () => {
           createdAt: new Date().toString()
         } as Task,
         newTask
-      ));
+      )
+    );
   }
 
   function editTask(task: Task) {
@@ -41,14 +46,24 @@ export const useTasksStore = defineStore('tasks', () => {
   }
 
   const tasks = computed(() =>
-    _tasks.value.sort((a, b) => {
-      if (sortOrder.value === 'ASC') {
-        return Date.parse(a.createdAt) - Date.parse(b.createdAt);
-      } else {
-        return Date.parse(b.createdAt) - Date.parse(a.createdAt);
-      }
-    })
+    _tasks.value
+      .filter((task) => priorityFilters.value.includes(task.priority))
+      .filter((task) => task.tags.some((tag) => tagsFilters.value.includes(tag)))
+      .sort((a, b) => {
+        const [first, second] = sortOrder.value === 'DESC' ? [a, b] : [b, a];
+        return Date.parse(first.createdAt) - Date.parse(second.createdAt);
+      })
   );
 
-  return { tasks, sortOrder, loadNewTasks, getTaskByUid, addNewTask, editTask, deleteTask };
+  return {
+    tasks,
+    priorityFilters,
+    tagsFilters,
+    sortOrder,
+    loadNewTasks,
+    getTaskByUid,
+    addNewTask,
+    editTask,
+    deleteTask
+  };
 });

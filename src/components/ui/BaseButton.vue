@@ -33,7 +33,7 @@ withDefaults(defineProps<ButtonProps>(), {
   &.ghost {
     background-color: $lightBackgroundColor;
     color: $textColor;
-    border: 1px solid lighten($color: $textColor, $amount: 50%); 
+    border: 1px solid lighten($color: $textColor, $amount: 50%);
   }
 
   &.primary {

@@ -19,11 +19,11 @@ export class TasksApiService {
         } as Task;
       });
   }
-  
+
   static async getTasks(count: number = 15): Promise<Task[]> {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(this.generator(count))
+        resolve(this.generator(count));
       }, 500);
     });
   }
