@@ -10,4 +10,4 @@ export function getRandomDate(startDate: Date, endDate: Date) {
 }
 
 export const getRandomDateInThisYear = () =>
-  getRandomDate(new Date(2023, 1, 1), new Date(2023, 4, 1));
+  getRandomDate(new Date(2023, 0, 1), new Date(2023, 3, 1));
