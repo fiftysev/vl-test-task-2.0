@@ -21,6 +21,7 @@ const isChecked = computed(() => {
   return props.modelValue === attrs.trueValue;
 });
 
+// to bind with v-model (array or single value)
 const handleInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
   if (props.modelValue instanceof Array) {
