@@ -1,7 +1,7 @@
 import BaseCheckbox from './BaseCheckbox.vue';
 import BaseButton from './BaseButton.vue';
 import BaseRadioButton from './BaseRadioButton.vue';
-import BaseInputGroup from './BaseInputGroup.vue';
+import BaseGroup from './BaseGroup.vue';
 import BaseCard from './BaseCard.vue';
 import BaseInput from './BaseInput.vue';
 import BaseSelect from './BaseSelect.vue';
@@ -11,7 +11,7 @@ export {
   BaseCheckbox,
   BaseButton,
   BaseRadioButton,
-  BaseInputGroup,
+  BaseGroup,
   BaseCard,
   BaseInput,
   BaseSelect,

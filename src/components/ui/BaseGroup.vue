@@ -1,19 +1,19 @@
 <script setup lang="ts">
-type InputGroupProps = {
+type GroupProps = {
   heading?: string;
 };
 
-defineProps<InputGroupProps>();
+defineProps<GroupProps>();
 </script>
 <template>
-  <div class="input-group">
+  <div class="group">
     <h4 class="heading" v-if="heading">{{ heading }}</h4>
     <slot></slot>
   </div>
 </template>
 
 <style scoped lang="scss">
-.input-group {
+.group {
   @include stack;
   align-items: start;
   gap: 0.5rem;

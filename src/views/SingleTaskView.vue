@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseCard, BaseInputGroup, BaseButton } from '@/components/ui';
+import { BaseCard, BaseGroup, BaseButton } from '@/components/ui';
 import type { Task } from '@/model/task';
 import { useTasksStore } from '@/stores/tasks';
 import { useRoute, useRouter } from 'vue-router';
@@ -30,28 +30,28 @@ task = store.getTaskByUid(uid as string);
 
 <template>
   <div class="button-row">
-    <base-button @click="onBackClick">Назад</base-button>
+    <base-button @click="onBackClick" variant="ghost">Назад</base-button>
     <div class="action-buttons">
       <base-button variant="primary" @click="onEditClick">Редактировать</base-button>
       <base-button variant="error" @click="onDeleteClick">Удалить</base-button>
     </div>
   </div>
   <base-card class="task-card">
-    <base-input-group heading="Название">
+    <base-group heading="Название">
       <p>{{ task.title }}</p>
-    </base-input-group>
-    <base-input-group heading="Дата создания">
+    </base-group>
+    <base-group heading="Дата создания">
       <p>{{ formatter.format(Date.parse(task.createdAt)) }}</p>
-    </base-input-group>
-    <base-input-group heading="Приоритет">
+    </base-group>
+    <base-group heading="Приоритет">
       <p>{{ task.priority }}</p>
-    </base-input-group>
-    <base-input-group heading="Отметки">
+    </base-group>
+    <base-group heading="Отметки">
       <p>{{ task.tags.join(',') }}</p>
-    </base-input-group>
-    <base-input-group heading="Описание" v-if="task.description">
+    </base-group>
+    <base-group heading="Описание" v-if="task.description">
       <p>{{ task.description }}</p>
-    </base-input-group>
+    </base-group>
   </base-card>
 </template>
 

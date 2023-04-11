@@ -17,13 +17,10 @@ export const useTasksStore = defineStore('tasks', () => {
 
   function addNewTask(newTask: TaskDto) {
     _tasks.value.push(
-      Object.assign(
-        {
-          uid: uid(),
-          createdAt: new Date().toString()
-        } as Task,
-        newTask
-      )
+      Object.assign(newTask, {
+        uid: uid(),
+        createdAt: new Date().toString()
+      } as Task)
     );
   }
 
@@ -50,7 +47,7 @@ export const useTasksStore = defineStore('tasks', () => {
       .filter((task) => priorityFilters.value.includes(task.priority))
       .filter((task) => task.tags.some((tag) => tagsFilters.value.includes(tag)))
       .sort((a, b) => {
-        const [first, second] = sortOrder.value === 'DESC' ? [a, b] : [b, a];
+        const [first, second] = sortOrder.value === 'DESC' ? [b, a] : [a, b];
         return Date.parse(first.createdAt) - Date.parse(second.createdAt);
       })
   );

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TaskPriority, TaskTag } from '@/model/task';
-import { BaseCard, BaseInputGroup, BaseRadioButton, BaseCheckbox } from '../ui';
+import { BaseCard, BaseGroup, BaseRadioButton, BaseCheckbox } from '../ui';
 import { useTasksStore } from '@/stores/tasks';
 import { storeToRefs } from 'pinia';
 
@@ -12,13 +12,13 @@ const priorityTypes: TaskPriority[] = ['Low', 'Medium', 'High'];
 
 <template>
   <base-card>
-    <base-input-group heading="Сортировка">
+    <base-group heading="Сортировка">
       <base-radio-button v-model="sortOrder" value="DESC" label="Сначала новые" />
       <base-radio-button v-model="sortOrder" value="ASC" label="Сначала старые" />
-    </base-input-group>
+    </base-group>
   </base-card>
   <base-card class="filter-panel">
-    <base-input-group heading="Приоритет">
+    <base-group heading="Приоритет">
       <base-checkbox
         v-for="priority in priorityTypes"
         :label="priority"
@@ -26,8 +26,8 @@ const priorityTypes: TaskPriority[] = ['Low', 'Medium', 'High'];
         v-model="priorityFilters"
         :value="priority"
       />
-    </base-input-group>
-    <base-input-group heading="Отметка">
+    </base-group>
+    <base-group heading="Отметка">
       <base-checkbox
         v-for="tag in tags"
         :label="tag"
@@ -35,7 +35,7 @@ const priorityTypes: TaskPriority[] = ['Low', 'Medium', 'High'];
         v-model="tagsFilters"
         :value="tag"
       />
-    </base-input-group>
+    </base-group>
   </base-card>
 </template>
 
