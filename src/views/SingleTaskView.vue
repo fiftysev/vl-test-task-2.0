@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { BaseCard, BaseGroup, BaseButton } from '@/components/ui';
+import { BaseCard, BaseGroup, BaseButton, BaseTag } from '@/components/ui';
+import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant';
 import type { Task } from '@/model/task';
 import { useTasksStore } from '@/stores/tasks';
+import { onBeforeMount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 let task: Task;
@@ -25,7 +27,13 @@ const formatter = Intl.DateTimeFormat('ru', {
   minute: '2-digit'
 });
 
-task = store.getTaskByUid(uid as string);
+onBeforeMount(() => {
+  try {
+    task = store.getTaskByUid(uid as string);
+  } catch (e: unknown) {
+    console.error((e as Error).message)
+  }
+});
 </script>
 
 <template>
@@ -44,10 +52,12 @@ task = store.getTaskByUid(uid as string);
       <p>{{ formatter.format(Date.parse(task.createdAt)) }}</p>
     </base-group>
     <base-group heading="Приоритет">
-      <p>{{ task.priority }}</p>
+      <base-tag :variant="priorityTagVariantMap[task.priority]" :content="task.priority" />
     </base-group>
     <base-group heading="Отметки">
-      <p>{{ task.tags.join(',') }}</p>
+      <div class="row">
+        <base-tag variant="secondary" v-for="tag in task.tags" :content="tag" :key="tag" />
+      </div>
     </base-group>
     <base-group heading="Описание" v-if="task.description">
       <p>{{ task.description }}</p>
@@ -61,7 +71,6 @@ p {
 }
 .task-card {
   @include stack;
-  gap: 2rem;
   margin-top: 1rem;
 }
 
@@ -72,5 +81,9 @@ p {
   .action-buttons {
     @include row;
   }
+}
+
+.row {
+  @include row;
 }
 </style>

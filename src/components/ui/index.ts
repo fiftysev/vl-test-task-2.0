@@ -6,6 +6,7 @@ import BaseCard from './BaseCard.vue';
 import BaseInput from './BaseInput.vue';
 import BaseSelect from './BaseSelect.vue';
 import BaseTextarea from './BaseTextarea.vue';
+import BaseTag from './BaseTag.vue';
 
 export {
   BaseCheckbox,
@@ -15,5 +16,6 @@ export {
   BaseCard,
   BaseInput,
   BaseSelect,
-  BaseTextarea
+  BaseTextarea,
+  BaseTag
 };

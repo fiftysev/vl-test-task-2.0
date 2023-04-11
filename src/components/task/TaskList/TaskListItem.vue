@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { BaseCard } from '@/components/ui';
+import { BaseCard, BaseTag } from '@/components/ui';
+import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant.js';
 import type { Task } from '@/model/task';
 type TaskListItemProps = {
   task: Task;
@@ -12,9 +13,11 @@ defineProps<TaskListItemProps>();
 <template>
   <base-card class="task-card" @click="() => $router.push(`/task/${task.uid}`)">
     <h2 class="heading">{{ task.title }}</h2>
-    <p>Создано: {{ formatter.format(Date.parse(task.createdAt)) }}</p>
-    <p>Приоритет: {{ task.priority }}</p>
-    <p>Отметки: {{ task.tags.join(',') }}</p>
+    <p>Созданa: {{ formatter.format(Date.parse(task.createdAt)) }}</p>
+    <div class="row">
+      <base-tag :variant="priorityTagVariantMap[task.priority]" :content="task.priority" />
+      <base-tag variant="secondary" v-for="tag in task.tags" :content="tag" :key="tag" />
+    </div>
   </base-card>
 </template>
 
@@ -31,6 +34,11 @@ defineProps<TaskListItemProps>();
     .heading {
       color: $primaryColor;
     }
+  }
+
+  .row {
+    @include row;
+    margin: 0.5rem 0;
   }
 }
 </style>
