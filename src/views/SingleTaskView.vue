@@ -54,7 +54,7 @@ onBeforeMount(() => {
     <base-group heading="Приоритет">
       <base-tag :variant="priorityTagVariantMap[task.priority]" :content="task.priority" />
     </base-group>
-    <base-group heading="Отметки">
+    <base-group heading="Отметки" v-if="task.tags.length">
       <div class="row">
         <base-tag variant="secondary" v-for="tag in task.tags" :content="tag" :key="tag" />
       </div>

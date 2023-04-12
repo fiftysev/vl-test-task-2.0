@@ -16,7 +16,14 @@ defineProps<TaskListItemProps>();
     <p>Созданa: {{ formatter.format(Date.parse(task.createdAt)) }}</p>
     <div class="row">
       <base-tag :variant="priorityTagVariantMap[task.priority]" :content="task.priority" />
-      <base-tag variant="secondary" v-for="tag in task.tags" :content="tag" :key="tag" />
+      <template v-if="task.tags.length">
+        <base-tag
+          variant="secondary"
+          v-for="tag in task.tags"
+          :content="tag"
+          :key="tag"
+        />
+      </template>
     </div>
   </base-card>
 </template>

@@ -54,7 +54,7 @@ const priorityTypes: TaskPriority[] = ['Low', 'Medium', 'High'];
         </base-select>
       </base-group>
       <base-group heading="Отметки">
-        <base-select multiple="true" v-model="formData.tags" required>
+        <base-select multiple="true" v-model="formData.tags">
           <option
             v-for="tag in tags"
             :value="tag"
@@ -66,7 +66,7 @@ const priorityTypes: TaskPriority[] = ['Low', 'Medium', 'High'];
         </base-select>
       </base-group>
       <base-group heading="Описание" v-model="formData.description">
-        <base-textarea />
+        <base-textarea v-model="formData.description"/>
       </base-group>
       <base-button class="submit-btn" variant="primary" type="submit">Сохранить</base-button>
     </form>

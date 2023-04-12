@@ -8,7 +8,7 @@ export class TasksApiService {
   private static generator(count: number): Task[] {
     return Array(count)
       .fill({})
-      .map((_) => {
+      .map(() => {
         const taskUid = uid();
         return {
           uid: taskUid,
