@@ -18,6 +18,10 @@ const router = createRouter({
     {
       path: '/edit/:uid',
       component: () => import('@/views/EditTask.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      component: () => import('@/views/NotFoundView.vue')
     }
   ]
 });
