@@ -29,6 +29,8 @@ const handleInput = (e: Event) => {
 
 <style lang="scss">
 .select {
+  -webkit-appearance: none;
+  appearance: none;
   min-height: 2.5rem;
   min-width: 40%;
 
