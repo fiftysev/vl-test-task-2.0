@@ -1,5 +1,7 @@
 # Тестовое задание на практику (frontend)
 
+Приложение доступно по [ссылке](https://vl-test-task.vercel.app/)
+
 ## Project Setup
 
 ```sh
