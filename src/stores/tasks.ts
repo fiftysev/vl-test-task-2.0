@@ -45,7 +45,9 @@ export const useTasksStore = defineStore('tasks', () => {
   const tasks = computed(() =>
     _tasks.value
       .filter((task) => priorityFilters.value.includes(task.priority))
-      .filter((task) => task.tags.some((tag) => tagsFilters.value.includes(tag)))
+      .filter((task) =>
+        task.tags.length ? task.tags.some((tag) => tagsFilters.value.includes(tag)) : true
+      )
       .sort((a, b) => {
         const [first, second] = sortOrder.value === 'DESC' ? [b, a] : [a, b];
         return Date.parse(first.createdAt) - Date.parse(second.createdAt);
