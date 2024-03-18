@@ -1,27 +1,15 @@
 <script setup lang="ts">
 type RadioProps = {
   label?: string;
-  modelValue?: unknown;
 };
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', payload: unknown): void;
-}>();
 
 defineProps<RadioProps>();
 
-const handleInput = (e: Event) => emit('update:modelValue', (e.target as HTMLInputElement).value);
+const inputModel = defineModel<number | string>();
 </script>
 <template>
   <div class="input-container">
-    <input
-      type="radio"
-      class="radio-btn"
-      name="radio"
-      v-bind="$attrs"
-      @input="handleInput"
-      :checked="modelValue === $attrs.value"
-    />
+    <input type="radio" class="radio-btn" name="radio" v-bind="$attrs" v-model="inputModel" />
     <label v-if="label" for="radio">{{ label }}</label>
   </div>
 </template>

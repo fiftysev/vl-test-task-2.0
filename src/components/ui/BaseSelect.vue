@@ -1,28 +1,9 @@
 <script setup lang="ts">
-import type { SelectHTMLAttributes } from 'vue';
-
-export interface SelectProps extends SelectHTMLAttributes {
-  modelValue?: unknown;
-}
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', payload: unknown): void;
-}>();
-
-defineProps<SelectProps>();
-
-const handleInput = (e: Event) => {
-  const target = e.target as HTMLSelectElement;
-  if (target.multiple) {
-    const values = Array.from(target.selectedOptions).map((opt) => opt.value);
-    return emit('update:modelValue', values);
-  }
-  return emit('update:modelValue', target.value);
-};
+const inputModel = defineModel<string | number | string[] | number[]>();
 </script>
 
 <template>
-  <select class="select" @change="handleInput" :selected="modelValue">
+  <select class="select" v-model="inputModel">
     <slot />
   </select>
 </template>

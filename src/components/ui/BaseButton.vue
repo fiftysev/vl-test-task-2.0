@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type { ButtonHTMLAttributes } from 'vue';
-
-export interface ButtonProps extends ButtonHTMLAttributes {
+type ButtonProps = {
   variant: 'ghost' | 'primary' | 'success' | 'error';
-}
+};
 
 withDefaults(defineProps<ButtonProps>(), {
   variant: 'ghost'

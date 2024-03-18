@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import type { InputHTMLAttributes } from 'vue';
-
-export interface InputProps extends InputHTMLAttributes {
+type InputProps = {
   label?: string;
-  modelValue?: unknown;
-}
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', payload: unknown): void;
-}>();
+};
 
 defineProps<InputProps>();
 
-const handleInput = (e: Event) => emit('update:modelValue', (e.target as HTMLInputElement).value);
+const inputModel = defineModel<string>();
 </script>
 
 <template>
@@ -22,8 +15,7 @@ const handleInput = (e: Event) => emit('update:modelValue', (e.target as HTMLInp
       class="input"
       :name="label ?? 'input'"
       v-bind="$attrs"
-      @input="handleInput"
-      :value="modelValue"
+      v-model="inputModel"
     />
   </div>
 </template>

@@ -1,41 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useAttrs } from 'vue';
-
 type CheckboxProps = {
   label?: string;
-  modelValue?: unknown;
 };
 
-const props = defineProps<CheckboxProps>();
-const attrs = useAttrs();
+defineProps<CheckboxProps>();
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', payload: unknown): void;
-}>();
-
-const isChecked = computed(() => {
-  if (props.modelValue instanceof Array) {
-    return props.modelValue.includes(attrs.value);
-  }
-  return props.modelValue === attrs.trueValue;
-});
-
-// to bind with v-model (array or single value)
-const handleInput = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  if (props.modelValue instanceof Array) {
-    let newValue = [...props.modelValue];
-    if (target.checked) {
-      newValue.push(attrs.value);
-    } else {
-      newValue.splice(newValue.indexOf(attrs.value), 1);
-    }
-    emit('update:modelValue', newValue);
-  } else {
-    emit('update:modelValue', target.checked ? attrs.trueValue : attrs.falseValue);
-  }
-};
+const inputModel = defineModel<string | string[]>()
 </script>
 
 <template>
@@ -45,8 +15,7 @@ const handleInput = (e: Event) => {
       name="checkbox"
       class="checkbox"
       v-bind="$attrs"
-      @input="handleInput"
-      :checked="isChecked"
+      v-model="inputModel"
     />
     <label v-if="label" for="checkbox"> {{ label }} </label>
   </div>

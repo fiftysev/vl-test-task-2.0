@@ -1,21 +1,9 @@
 <script setup lang="ts">
-import type { TextareaHTMLAttributes } from 'vue';
-
-export interface TextAreaProps extends TextareaHTMLAttributes {
-  modelValue?: unknown;
-}
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', payload: unknown): void;
-}>();
-
-defineProps<TextAreaProps>();
-
-const handleInput = (e: Event) => emit('update:modelValue', (e.target as HTMLInputElement).value);
+const inputModel = defineModel<string>();
 </script>
 
 <template>
-  <textarea class="textarea" @input="handleInput" :value="modelValue as string" />
+  <textarea class="textarea" v-model="inputModel" />
 </template>
 
 <style scoped lang="scss">
