@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { BaseCard, BaseTag } from '@/components/ui';
 import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant.js';
-import type { Task } from '@/model/task';
 type TaskListItemProps = {
-  task: Task;
+  task: TaskApi.Task;
 };
 
 const formatter = new Intl.DateTimeFormat('ru');
@@ -17,7 +16,12 @@ defineProps<TaskListItemProps>();
     <div class="row">
       <base-tag :variant="priorityTagVariantMap[task.priority]" :content="task.priority" />
       <template v-if="task.taskTags.length">
-        <base-tag variant="secondary" v-for="tag in task.taskTags" :content="tag.name" :key="tag.name" />
+        <base-tag
+          variant="secondary"
+          v-for="tag in task.taskTags"
+          :content="tag.name"
+          :key="tag.name"
+        />
       </template>
     </div>
   </base-card>

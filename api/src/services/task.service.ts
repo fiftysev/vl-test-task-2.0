@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { Static } from 'elysia';
-import { FiltersQuery, TaskBodyDto } from '../controllers/task/task.validation';
+import { TaskBodyDto } from '../controllers/task/task.validation';
+
 
 class TaskService {
   private db: PrismaClient;
@@ -18,35 +18,32 @@ class TaskService {
     this.db = new PrismaClient();
   }
 
-  async all({
-    limit = 15,
-    priority = ['Low', 'Medium', 'High'],
-    tags = [1, 2, 3]
-  }: Static<typeof FiltersQuery> = {}) {
-    if (!Array.isArray(priority)) priority = [priority];
-    if (!Array.isArray(tags)) tags = [tags];
-
+  async all(query: TaskApi.TasksQuery) {
     const result = await this.db.task.findMany({
       ...this.tagsSelector,
       where: {
         AND: [
           {
             priority: {
-              in: priority
+              in: query.priority
             }
           },
           {
             taskTags: {
               some: {
                 tagId: {
-                  in: tags
+                  in: query.tags
                 }
               }
             }
           }
         ]
       },
-      take: limit
+      orderBy: {
+        createdAt: query.sort
+      },
+      skip: query.skip,
+      take: query.take
     });
 
     return result.map((task) => ({

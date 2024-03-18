@@ -1,18 +1,18 @@
 import { Elysia } from 'elysia';
+import { buildQuery } from '../../lib/build-query';
 import { TaskService } from '../../services/task.service';
-import { FiltersQuery, PartialTaskBody, TaskBody, Uid } from './task.validation';
+import { PartialTaskBody, TaskBody, Uid } from './task.validation';
 
 const TaskController = new Elysia()
   .model({
     task: TaskBody,
     partialTask: PartialTaskBody,
-    uid: Uid,
-    filters: FiltersQuery
+    uid: Uid
   })
   .decorate({
     taskService: new TaskService()
   })
-  .get('/tasks', async ({ taskService, query }) => await taskService.all(query))
+  .get('/tasks', async ({ taskService, query }) => await taskService.all(buildQuery(query)))
   .get('/tasks/:uid', async ({ taskService, params }) => await taskService.find(params.uid), {
     params: 'uid'
   })

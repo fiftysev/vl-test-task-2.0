@@ -14,6 +14,6 @@ export type TaskTag = {
   name: string;
 };
 
-export type SortOrder = 'ASC' | 'DESC';
+export type SortOrder = 'asc' | 'desc';
 
 export type TaskDto = Omit<Task, 'uid' | 'createdAt'>;

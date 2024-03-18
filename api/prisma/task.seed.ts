@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 for (const tag of ['Research', 'Design', 'Development']) {
   await prisma.tag.create({
     data: {
+      id: tag.indexOf(tag) + 1,
       name: tag
     }
   });

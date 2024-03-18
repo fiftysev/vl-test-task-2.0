@@ -13,11 +13,11 @@ const tags = [
     name: 'Research'
   },
   {
-    id: 2,
+    id: 3,
     name: 'Development'
   },
   {
-    id: 3,
+    id: 2,
     name: 'Design'
   }
 ];
@@ -26,8 +26,8 @@ const tags = [
 <template>
   <base-card>
     <base-group heading="Сортировка">
-      <base-radio-button v-model="filters.sort" value="DESC" label="Сначала новые" />
-      <base-radio-button v-model="filters.sort" value="ASC" label="Сначала старые" />
+      <base-radio-button v-model="filters.sort" value="desc" label="Сначала новые" />
+      <base-radio-button v-model="filters.sort" value="asc" label="Сначала старые" />
     </base-group>
   </base-card>
   <base-card class="filter-panel">

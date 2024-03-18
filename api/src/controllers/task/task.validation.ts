@@ -18,14 +18,7 @@ const Uid = t.Object({
   uid: t.String()
 });
 
-const FiltersQuery = t.Object({
-  tags: t.Optional(t.Array(t.Number())),
-  priority: t.Optional(t.Array(t.String())),
-  limit: t.Optional(t.Number()),
-  sort: t.Optional(t.String())
-});
-
 type TaskBodyDto = Static<typeof TaskBody>;
 
-export { FiltersQuery, PartialTaskBody, TaskBody, Uid };
+export { PartialTaskBody, TaskBody, Uid };
 export type { TaskBodyDto };

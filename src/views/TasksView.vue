@@ -4,15 +4,25 @@ import { BaseButton } from '@/components/ui';
 import TaskFilterPanel from '@/components/task/TaskFilterPanel.vue';
 import TaskList from '@/components/task/TaskList/TaskList.vue';
 
-import { $tasks, loadTasksFx } from '@/effector-stores/tasks.store';
+import { $tasks, nextPage } from '@/effector-stores/tasks.store';
 import { useStore } from 'effector-vue/composition';
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 
 const store = useStore($tasks);
 
-onMounted(() => {
-  loadTasksFx({});
+const tasksObserver = new IntersectionObserver((entries) => {
+  entries.forEach(async (entry) => {
+    if (entry.isIntersecting && store.value.length > 0 && window.scrollY > 300) {
+      nextPage() 
+    }
+  });
 });
+
+onMounted(async () => {
+  tasksObserver.observe(document.querySelector('.list-end')!);
+});
+
+onUnmounted(() => tasksObserver.disconnect());
 </script>
 
 <template>

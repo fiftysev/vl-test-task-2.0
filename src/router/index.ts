@@ -1,3 +1,4 @@
+import { loadTasksTrigger } from '@/effector-stores/tasks.store';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -5,7 +6,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: () => import('@/views/TasksView.vue')
+      component: () => import('@/views/TasksView.vue'),
+      beforeEnter(to, from, next) {
+        loadTasksTrigger();
+        next();
+      }
     },
     {
       path: '/task/:uid',
