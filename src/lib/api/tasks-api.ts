@@ -1,30 +1,10 @@
-import type { Task } from '@/model/task';
-import { getRandomDateInThisYear, pickRandomElement } from '../utils/mocking';
-import { uid } from 'uid';
+import axios from 'axios';
 
-export class TasksApiService {
-  private static ID_SEED = 1000;
+const BASE_URL = 'http://localhost:8080';
 
-  private static generator(count: number): Task[] {
-    return Array(count)
-      .fill({})
-      .map(() => {
-        const taskUid = uid();
-        return {
-          uid: taskUid,
-          title: `Задача ${Math.floor(Math.random() * this.ID_SEED)}`,
-          createdAt: getRandomDateInThisYear().toString(),
-          priority: pickRandomElement(['Low', 'Medium', 'High']),
-          tags: [pickRandomElement(['Development', 'Design', 'Research'])]
-        } as Task;
-      });
+export const $http = axios.create({
+  baseURL: BASE_URL,
+  paramsSerializer: {
+    indexes: null
   }
-
-  static async getTasks(count: number = 15): Promise<Task[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(this.generator(count));
-      }, 500);
-    });
-  }
-}
+});

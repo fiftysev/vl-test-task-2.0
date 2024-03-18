@@ -12,9 +12,7 @@ const TaskController = new Elysia()
   .decorate({
     taskService: new TaskService()
   })
-  .get('/tasks', async ({ taskService }) => await taskService.all({}), {
-    query: FiltersQuery
-  })
+  .get('/tasks', async ({ taskService, query }) => await taskService.all(query))
   .get('/tasks/:uid', async ({ taskService, params }) => await taskService.find(params.uid), {
     params: 'uid'
   })

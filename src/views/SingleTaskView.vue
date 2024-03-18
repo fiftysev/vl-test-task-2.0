@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseCard, BaseGroup, BaseButton, BaseTag } from '@/components/ui';
+import { BaseButton, BaseCard, BaseGroup, BaseTag } from '@/components/ui';
 import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant';
 import type { Task } from '@/model/task';
 import { useTasksStore } from '@/stores/tasks';
@@ -31,7 +31,7 @@ onBeforeMount(() => {
   try {
     task = store.getTaskByUid(uid as string);
   } catch (e: unknown) {
-    console.error((e as Error).message)
+    console.error((e as Error).message);
   }
 });
 </script>
@@ -52,11 +52,11 @@ onBeforeMount(() => {
       <p>{{ formatter.format(Date.parse(task.createdAt)) }}</p>
     </base-group>
     <base-group heading="Приоритет">
-      <base-tag :variant="priorityTagVariantMap[task.priority]" :content="task.priority" />
+      <base-tag :variant="priorityTagVariantMap[task.priority]" :tag="task.priority" />
     </base-group>
-    <base-group heading="Отметки" v-if="task.tags.length">
+    <base-group heading="Отметки" v-if="task.taskTags.length">
       <div class="row">
-        <base-tag variant="secondary" v-for="tag in task.tags" :content="tag" :key="tag" />
+        <base-tag variant="secondary" v-for="tag in task.taskTags" :tag="tag" :key="tag" />
       </div>
     </base-group>
     <base-group heading="Описание" v-if="task.description">

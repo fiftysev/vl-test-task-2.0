@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Task, TaskPriority, TaskTag } from '@/model/task';
-import { BaseCard, BaseGroup, BaseInput, BaseSelect, BaseTextarea, BaseButton } from '../ui';
 import { ref, toRefs } from 'vue';
+import { BaseButton, BaseCard, BaseGroup, BaseInput, BaseSelect, BaseTextarea } from '../ui';
 
 type FormProps = {
   task?: Task;
@@ -17,7 +17,7 @@ const emptyTask: Task = {
   createdAt: '',
   priority: 'Low',
   description: '',
-  tags: []
+  taskTags: []
 };
 
 let formData = ref<Task>(task?.value ? Object.assign(emptyTask, task.value) : (emptyTask as Task));
@@ -54,19 +54,19 @@ const priorityTypes: TaskPriority[] = ['Low', 'Medium', 'High'];
         </base-select>
       </base-group>
       <base-group heading="Отметки">
-        <base-select multiple="true" v-model="formData.tags">
+        <base-select multiple="true" v-model="formData.taskTags">
           <option
             v-for="tag in tags"
             :value="tag"
             :key="tag"
-            :selected="formData.tags.includes(tag)"
+            :selected="formData.taskTags.includes(tag)"
           >
             {{ tag }}
           </option>
         </base-select>
       </base-group>
       <base-group heading="Описание" v-model="formData.description">
-        <base-textarea v-model="formData.description"/>
+        <base-textarea v-model="formData.description" />
       </base-group>
       <base-button class="submit-btn" variant="primary" type="submit">Сохранить</base-button>
     </form>

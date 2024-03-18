@@ -3,24 +3,16 @@ import { BaseButton } from '@/components/ui';
 
 import TaskFilterPanel from '@/components/task/TaskFilterPanel.vue';
 import TaskList from '@/components/task/TaskList/TaskList.vue';
-import { onMounted, onUnmounted } from 'vue';
-import { useTasksStore } from '@/stores/tasks';
 
-const store = useTasksStore();
+import { $tasks, loadTasksFx } from '@/effector-stores/tasks.store';
+import { useStore } from 'effector-vue/composition';
+import { onMounted } from 'vue';
 
-const tasksObserver = new IntersectionObserver((entries) => {
-  entries.forEach(async (entry) => {
-    if (entry.isIntersecting) {
-      store.loadNewTasks();
-    }
-  });
+const store = useStore($tasks);
+
+onMounted(() => {
+  loadTasksFx({});
 });
-
-onMounted(async () => {
-  tasksObserver.observe(document.querySelector('.list-end')!);
-});
-
-onUnmounted(() => tasksObserver.disconnect());
 </script>
 
 <template>
@@ -34,9 +26,10 @@ onUnmounted(() => tasksObserver.disconnect());
         variant="primary"
         style="margin-bottom: 1rem"
         @click="() => $router.push('/add-task')"
-        >Добавить задачу</base-button
       >
-      <task-list :list-data="store.tasks" />
+        Добавить задачу
+      </base-button>
+      <task-list :list-data="store" />
       <span class="list-end"></span>
     </section>
   </main>

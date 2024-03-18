@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { TaskBodyDto } from '../controllers/task/task.validation';
+import { Static } from 'elysia';
+import { FiltersQuery, TaskBodyDto } from '../controllers/task/task.validation';
 
 class TaskService {
   private db: PrismaClient;
@@ -19,20 +20,19 @@ class TaskService {
 
   async all({
     limit = 15,
-    priorities = ['Low', 'Medium', 'High'],
+    priority = ['Low', 'Medium', 'High'],
     tags = [1, 2, 3]
-  }: {
-    limit?: number;
-    priorities?: string[];
-    tags?: number[];
-  }) {
+  }: Static<typeof FiltersQuery> = {}) {
+    if (!Array.isArray(priority)) priority = [priority];
+    if (!Array.isArray(tags)) tags = [tags];
+
     const result = await this.db.task.findMany({
       ...this.tagsSelector,
       where: {
         AND: [
           {
             priority: {
-              in: priorities
+              in: priority
             }
           },
           {

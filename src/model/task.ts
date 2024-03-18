@@ -2,13 +2,17 @@ export type Task = {
   uid: string;
   title: string;
   description?: string;
-  createdAt: string;
+  createdAt: Date;
   priority: TaskPriority;
-  tags: TaskTag[];
+  taskTags: TaskTag[];
 };
 
 export type TaskPriority = 'Low' | 'Medium' | 'High';
-export type TaskTag = 'Design' | 'Development' | 'Research';
+
+export type TaskTag = {
+  id: number;
+  name: string;
+};
 
 export type SortOrder = 'ASC' | 'DESC';
 
