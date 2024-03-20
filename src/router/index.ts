@@ -1,5 +1,5 @@
 import { formModel } from '@/effector-stores/task-form.store';
-import { loadTaskFx } from '@/effector-stores/task-view.store';
+import { taskModel } from '@/effector-stores/task-view.store';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
@@ -13,7 +13,7 @@ const router = createRouter({
       path: '/task/:uid',
       component: () => import('@/views/SingleTaskView.vue'),
       beforeEnter: async (to, from, next) => {
-        await loadTaskFx(to.params.uid as string);
+        await taskModel.loadTaskFx(to.params.uid as string);
         next();
       }
     },

@@ -14,6 +14,7 @@ const initialState: TaskApi.Task = {
 const $task = createStore<TaskApi.Task | null>(null);
 
 const loadTaskFx = createEffect(taskApi.getTaskByUid);
+const deleteTaskFx = createEffect(taskApi.deleteTask);
 
 sample({
   source: loadTaskFx.doneData,
@@ -28,9 +29,18 @@ sample({
   }
 });
 
+sample({
+  clock: deleteTaskFx.done,
+  fn: () => router.push('/')
+});
+
 const resetTask = createEvent();
 
 $task.reset(loadTaskFx);
 $task.reset(resetTask);
 
-export { $task, loadTaskFx };
+export const taskModel = {
+  $task,
+  loadTaskFx,
+  deleteTaskFx,
+};

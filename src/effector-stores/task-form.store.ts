@@ -11,9 +11,6 @@ const initialState: TaskApi.TaskDto = {
 
 const $form = createStore<TaskApi.TaskDto>(initialState);
 
-const updateTaskFx = createEffect(taskApi.updateTask);
-const submitUpdate = createEvent<string>();
-
 const loadTask = async (_uid: string) => {
   const result = await taskApi.getTaskByUid(_uid);
 
@@ -24,14 +21,13 @@ const loadTask = async (_uid: string) => {
 
 const loadTaskFx = createEffect(loadTask);
 
-$form.reset(loadTaskFx);
+const updateTaskFx = createEffect(taskApi.updateTask);
+const submitUpdate = createEvent<string>();
 
-sample({
-  source: $form,
-  clock: submitUpdate,
-  fn: (taskData, uid) => ({ uid, taskData }),
-  target: updateTaskFx
-});
+const createTaskFx = createEffect(taskApi.createTask);
+const submitCreate = createEvent();
+
+$form.reset(loadTaskFx);
 
 sample({
   source: loadTaskFx.doneData,
@@ -47,12 +43,31 @@ sample({
 });
 
 sample({
+  source: $form,
+  clock: submitUpdate,
+  fn: (taskData, uid) => ({ uid, taskData }),
+  target: updateTaskFx
+});
+
+sample({
+  source: $form,
+  clock: submitCreate,
+  target: createTaskFx
+});
+
+sample({
   clock: updateTaskFx.done,
+  fn: () => router.push('/')
+});
+
+sample({
+  clock: createTaskFx.done,
   fn: () => router.push('/')
 });
 
 export const formModel = {
   $form,
   submitUpdate,
+  submitCreate,
   loadTaskFx
 };

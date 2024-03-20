@@ -2,7 +2,8 @@
 import { useStore } from 'effector-vue/composition';
 import { useRoute, useRouter } from 'vue-router';
 
-import { $task } from '@/effector-stores/task-view.store';
+import { taskModel } from '@/effector-stores/task-view.store';
+
 import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant';
 
 import { BaseButton, BaseCard, BaseGroup, BaseTag } from '@/components/ui';
@@ -12,8 +13,8 @@ const router = useRouter();
 
 const onBackClick = () => router.back();
 const onEditClick = () => router.push(`/edit/${uid}`);
-const onDeleteClick = () => {
-  router.back();
+const onDeleteClick = async () => {
+  await taskModel.deleteTaskFx(uid as string);
 };
 
 const formatter = Intl.DateTimeFormat('ru', {
@@ -24,7 +25,7 @@ const formatter = Intl.DateTimeFormat('ru', {
   minute: '2-digit'
 });
 
-const task = useStore($task);
+const task = useStore(taskModel.$task);
 </script>
 
 <template>
