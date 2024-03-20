@@ -2,25 +2,10 @@
 import { $tasksFilter } from '@/effector-stores/tasks.store';
 import { useVModel } from 'effector-vue/composition';
 import { BaseCard, BaseCheckbox, BaseGroup, BaseRadioButton } from '../ui';
+import { PRIORITIES } from '@/lib/constants/priority';
+import { TASK_TAGS } from '@/lib/constants/tags';
 
 const filters = useVModel($tasksFilter);
-
-const priorityTypes = ['Low', 'Medium', 'High'];
-
-const tags = [
-  {
-    id: 1,
-    name: 'Research'
-  },
-  {
-    id: 3,
-    name: 'Development'
-  },
-  {
-    id: 2,
-    name: 'Design'
-  }
-];
 </script>
 
 <template>
@@ -33,7 +18,7 @@ const tags = [
   <base-card class="filter-panel">
     <base-group heading="Приоритет">
       <base-checkbox
-        v-for="priority in priorityTypes"
+        v-for="priority in PRIORITIES"
         :label="priority"
         :key="priority"
         v-model="filters.priority"
@@ -42,7 +27,7 @@ const tags = [
     </base-group>
     <base-group heading="Отметка">
       <base-checkbox
-        v-for="tag in tags"
+        v-for="tag in TASK_TAGS"
         :label="tag.name"
         :key="tag.id"
         v-model="filters.tags"

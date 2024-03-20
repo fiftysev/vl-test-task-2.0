@@ -5,7 +5,7 @@ type CheckboxProps = {
 
 defineProps<CheckboxProps>();
 
-const inputModel = defineModel<string | string[]>()
+const inputModel = defineModel<string | string[] | number | number[]>()
 </script>
 
 <template>

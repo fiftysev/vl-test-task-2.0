@@ -1,26 +1,13 @@
 <script setup lang="ts">
 import TaskForm from '@/components/task/TaskForm.vue';
-import type { Task } from '@/model/task';
-import { useTasksStore } from '@/stores/tasks';
-import { onBeforeMount } from 'vue';
-import { useRoute } from 'vue-router';
+import { $task } from '@/effector-stores/task-view.store';
+import { useVModel } from 'effector-vue/composition';
 
-const store = useTasksStore();
-
-const { uid } = useRoute().params;
-let task: Task;
-
-onBeforeMount(() => {
-  try {
-    task = store.getTaskByUid(uid as string);
-  } catch (e: unknown) {
-    console.error((e as Error).message)
-  }
-});
+const task = useVModel($task);
 </script>
 
 <template>
-  <task-form :on-submit="store.editTask" :task="task" />
+  <task-form v-if="task" :on-submit="() => console.log(task)" :task="task" />
 </template>
 
 <style scoped lang="scss"></style>

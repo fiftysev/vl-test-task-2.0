@@ -16,8 +16,8 @@ const router = createRouter({
     {
       path: '/task/:uid',
       component: () => import('@/views/SingleTaskView.vue'),
-      beforeEnter(to, from, next) {
-        loadTaskFx(to.params.uid as string);
+      beforeEnter: async (to, from, next) => {
+        await loadTaskFx(to.params.uid as string);
         next();
       }
     },
@@ -27,7 +27,11 @@ const router = createRouter({
     },
     {
       path: '/edit/:uid',
-      component: () => import('@/views/EditTask.vue')
+      component: () => import('@/views/EditTask.vue'),
+      beforeEnter(to, from, next) {
+        loadTaskFx(to.params.uid as string);
+        next();
+      }
     },
     {
       path: '/:pathMatch(.*)*',

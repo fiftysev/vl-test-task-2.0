@@ -10,7 +10,8 @@ const inputModel = defineModel<string>();
 .textarea {
   width: 100%;
   min-width: 40%;
-  padding: 1rem;
+  padding: 0.5rem;
+  font-family: inherit;
 
   @media only screen and (max-width: 600px) {
     width: 100%;

@@ -1,29 +1,14 @@
 <script setup lang="ts">
-import type { Task, TaskPriority, TaskTag } from '@/model/task';
-import { ref, toRefs } from 'vue';
+import { PRIORITIES } from '@/lib/constants/priority';
+import { TASK_TAGS } from '@/lib/constants/tags';
 import { BaseButton, BaseCard, BaseGroup, BaseInput, BaseSelect, BaseTextarea } from '../ui';
 
 type FormProps = {
-  task?: Task;
+  task: TaskApi.Task;
   onSubmit: (...args: any[]) => void;
 };
 
-const props = defineProps<FormProps>();
-const { task } = toRefs(props);
-
-const emptyTask: Task = {
-  uid: '',
-  title: '',
-  createdAt: '',
-  priority: 'Low',
-  description: '',
-  taskTags: []
-};
-
-let formData = ref<Task>(task?.value ? Object.assign(emptyTask, task.value) : (emptyTask as Task));
-
-const tags: TaskTag[] = ['Design', 'Development', 'Research'];
-const priorityTypes: TaskPriority[] = ['Low', 'Medium', 'High'];
+defineProps<FormProps>();
 </script>
 
 <template>
@@ -33,40 +18,40 @@ const priorityTypes: TaskPriority[] = ['Low', 'Medium', 'High'];
       class="task-form"
       @submit.prevent="
         () => {
-          onSubmit(formData);
+          onSubmit();
           $router.push('/');
         }
       "
     >
       <base-group heading="Название">
-        <base-input v-model="formData.title" type="text" required />
+        <base-input v-model="task.title" type="text" required />
       </base-group>
       <base-group heading="Приоритет">
-        <base-select v-model="formData.priority" required>
+        <base-select v-model="task.priority" required>
           <option
-            v-for="priority in priorityTypes"
+            v-for="priority in PRIORITIES"
             :value="priority"
             :key="priority"
-            :selected="formData.priority === priority"
+            :selected="task.priority === priority"
           >
             {{ priority }}
           </option>
         </base-select>
       </base-group>
       <base-group heading="Отметки">
-        <base-select multiple="true" v-model="formData.taskTags">
+        <base-select multiple="true" v-model="task.taskTags">
           <option
-            v-for="tag in tags"
+            v-for="tag in TASK_TAGS"
             :value="tag"
-            :key="tag"
-            :selected="formData.taskTags.includes(tag)"
+            :key="tag.id"
+            :selected="task.taskTags.includes(tag)"
           >
-            {{ tag }}
+            {{ tag.name }}
           </option>
         </base-select>
       </base-group>
-      <base-group heading="Описание" v-model="formData.description">
-        <base-textarea v-model="formData.description" />
+      <base-group heading="Описание" v-model="task.description">
+        <base-textarea v-model="task.description" />
       </base-group>
       <base-button class="submit-btn" variant="primary" type="submit">Сохранить</base-button>
     </form>

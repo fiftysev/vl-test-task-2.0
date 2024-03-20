@@ -1,6 +1,15 @@
 import { $http } from '@/lib/api/tasks-api';
 import router from '@/router';
-import { createEffect, createStore, sample } from 'effector';
+import { createEffect, createEvent, createStore, sample } from 'effector';
+
+const initialState: TaskApi.Task = {
+  uid: '',
+  title: '',
+  description: '',
+  createdAt: new Date().toISOString(),
+  priority: 'Low',
+  taskTags: []
+};
 
 const $task = createStore<TaskApi.Task | null>(null);
 
@@ -25,6 +34,9 @@ sample({
   }
 });
 
-$task.reset(loadTaskFx)
+const resetTask = createEvent();
+
+$task.reset(loadTaskFx);
+$task.reset(resetTask);
 
 export { $task, loadTaskFx };

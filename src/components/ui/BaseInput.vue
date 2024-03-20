@@ -11,12 +11,7 @@ const inputModel = defineModel<string>();
 <template>
   <div class="input-container">
     <label v-if="label" :for="label">{{ label }}</label>
-    <input
-      class="input"
-      :name="label ?? 'input'"
-      v-bind="$attrs"
-      v-model="inputModel"
-    />
+    <input class="input" :name="label ?? 'input'" v-bind="$attrs" v-model="inputModel" />
   </div>
 </template>
 
@@ -24,6 +19,7 @@ const inputModel = defineModel<string>();
 .input-container {
   width: 100%;
   .input {
+    padding: 0.5rem;
     min-height: 2.5rem;
     border: 1px solid lighten($color: $textColor, $amount: 50%);
     border-radius: 0.25rem;

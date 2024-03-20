@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const inputModel = defineModel<string | number | string[] | number[]>();
+const inputModel = defineModel<unknown>();
 </script>
 
 <template>
@@ -10,6 +10,7 @@ const inputModel = defineModel<string | number | string[] | number[]>();
 
 <style lang="scss">
 .select {
+  padding: 0.5rem;
   -webkit-appearance: none;
   appearance: none;
   min-height: 2.5rem;
