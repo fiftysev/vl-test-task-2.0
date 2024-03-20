@@ -4,8 +4,8 @@ import { BaseButton } from '@/components/ui';
 import TaskFilterPanel from '@/components/task/TaskFilterPanel.vue';
 import TaskList from '@/components/task/TaskList/TaskList.vue';
 
-import { $tasks, nextPage } from '@/effector-stores/tasks.store';
-import { useStore } from 'effector-vue/composition';
+import { $tasks, nextPage, tasksGate } from '@/effector-stores/tasks.store';
+import { useGate, useStore } from 'effector-vue/composition';
 import { onMounted, onUnmounted } from 'vue';
 
 const store = useStore($tasks);
@@ -13,10 +13,12 @@ const store = useStore($tasks);
 const tasksObserver = new IntersectionObserver((entries) => {
   entries.forEach(async (entry) => {
     if (entry.isIntersecting && store.value.length > 0 && window.scrollY > 300) {
-      nextPage() 
+      nextPage();
     }
   });
 });
+
+useGate(tasksGate, () => 'all');
 
 onMounted(async () => {
   tasksObserver.observe(document.querySelector('.list-end')!);

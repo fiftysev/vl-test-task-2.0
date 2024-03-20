@@ -13,8 +13,8 @@ CREATE TABLE "TaskTag" (
     "tagId" INTEGER NOT NULL,
 
     PRIMARY KEY ("taskUid", "tagId"),
-    CONSTRAINT "TaskTag_taskUid_fkey" FOREIGN KEY ("taskUid") REFERENCES "Task" ("uid") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "TaskTag_tagId_fkey" FOREIGN KEY ("tagId") REFERENCES "Tag" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "TaskTag_taskUid_fkey" FOREIGN KEY ("taskUid") REFERENCES "Task" ("uid") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "TaskTag_tagId_fkey" FOREIGN KEY ("tagId") REFERENCES "Tag" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable

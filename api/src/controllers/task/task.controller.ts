@@ -20,7 +20,7 @@ const TaskController = new Elysia()
     body: 'task'
   })
   .patch(
-    '/tasks/:uid/update',
+    '/tasks/:uid',
     async ({ taskService, params, body }) => await taskService.update(params.uid, body),
     {
       body: 'partialTask',

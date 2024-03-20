@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import TaskForm from '@/components/task/TaskForm.vue';
-import { $task } from '@/effector-stores/task-view.store';
+import { formModel } from '@/effector-stores/task-form.store';
 import { useVModel } from 'effector-vue/composition';
+import { useRoute } from 'vue-router';
 
-const task = useVModel($task);
+const task = useVModel(formModel.$form);
+
+const { uid } = useRoute().params;
 </script>
 
 <template>
-  <task-form v-if="task" :on-submit="() => console.log(task)" :task="task" />
+  <task-form :on-submit="() => formModel.submitUpdate(uid as string)" :task="task" />
 </template>
 
 <style scoped lang="scss"></style>

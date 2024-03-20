@@ -8,6 +8,8 @@ declare namespace TaskApi {
     taskTags: TaskTag[];
   };
 
+  type TaskDto = Omit<Task, 'uid' | 'createdAt'> & { taskTags: number[] };
+
   type TaskPriority = 'Low' | 'Medium' | 'High';
 
   type TaskTag = {

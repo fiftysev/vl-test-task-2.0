@@ -22,8 +22,8 @@ model Task {
 model TaskTag {
   taskUid String
   tagId   Int
-  task    Task   @relation(fields: [taskUid], references: [uid], onDelete: Cascade)
-  tag     Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  task    Task   @relation(fields: [taskUid], references: [uid])
+  tag     Tag    @relation(fields: [tagId], references: [id])
 
   @@id([taskUid, tagId])
 }

@@ -1,4 +1,4 @@
-import { $http } from '@/lib/api/tasks-api';
+import { taskApi } from '@/lib/api/taskApi';
 import router from '@/router';
 import { createEffect, createEvent, createStore, sample } from 'effector';
 
@@ -13,13 +13,7 @@ const initialState: TaskApi.Task = {
 
 const $task = createStore<TaskApi.Task | null>(null);
 
-const loadTask = async (uid: string) => {
-  const result = await $http.get<TaskApi.Task>(`/tasks/${uid}`);
-
-  return result.data;
-};
-
-const loadTaskFx = createEffect(loadTask);
+const loadTaskFx = createEffect(taskApi.getTaskByUid);
 
 sample({
   source: loadTaskFx.doneData,

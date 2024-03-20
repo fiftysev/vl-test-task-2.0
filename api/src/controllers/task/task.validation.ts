@@ -9,7 +9,7 @@ const TaskBody = t.Object({
   priority: t.String({
     default: 'Low'
   }),
-  tags: t.Optional(t.Array(t.Number()))
+  taskTags: t.Optional(t.Array(t.Number()))
 });
 
 const PartialTaskBody = t.Partial(TaskBody);

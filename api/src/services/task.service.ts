@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { TaskBodyDto } from '../controllers/task/task.validation';
 
-
 class TaskService {
   private db: PrismaClient;
   private tagsSelector = {
@@ -15,7 +14,7 @@ class TaskService {
   };
 
   constructor() {
-    this.db = new PrismaClient();
+    this.db = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
   }
 
   async all(query: TaskApi.TasksQuery) {
@@ -67,13 +66,13 @@ class TaskService {
   }
 
   async create(taskData: TaskBodyDto) {
-    const { tags, ...data } = taskData;
+    const { taskTags, ...data } = taskData;
 
     return this.db.task.create({
       data: {
         ...data,
         taskTags: {
-          create: tags?.map((tagId) => ({
+          create: taskTags?.map((tagId) => ({
             tag: { connect: { id: tagId } }
           }))
         }
@@ -82,7 +81,7 @@ class TaskService {
   }
 
   async update(uid: string, taskData: Partial<TaskBodyDto>) {
-    const { tags, ...data } = taskData;
+    const { taskTags, ...data } = taskData;
 
     return this.db.task.update({
       where: { uid },
@@ -90,7 +89,7 @@ class TaskService {
         ...data,
         taskTags: {
           deleteMany: {},
-          create: tags?.map((tagId) => ({
+          create: taskTags?.map((tagId) => ({
             tag: { connect: { id: tagId } }
           }))
         }

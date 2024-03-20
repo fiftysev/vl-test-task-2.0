@@ -1,6 +1,7 @@
 import { combine, createEffect, createEvent, createStore, sample } from 'effector';
 
-import { $http } from '@/lib/api/tasks-api';
+import { taskApi } from '@/lib/api/taskApi';
+import { createGate } from 'effector-vue/composition';
 
 const $tasksFilter = createStore<TaskApi.TasksFilter>({
   sort: 'desc',
@@ -21,22 +22,14 @@ $tasksPagination.on(nextPage, (pagination) => ({
 
 const $tasksQuery = combine({ filter: $tasksFilter, pagination: $tasksPagination });
 
-const $tasks = createStore<TaskApi.Task[]>([]).reset($tasksFilter);
+const $tasks = createStore<TaskApi.Task[]>([]);
+const loadTasksFx = createEffect(taskApi.getAllTasks);
 
-const loadTasks = async ({ filter, pagination }: TaskApi.TasksQueryDto) => {
-  const result = await $http.get<TaskApi.Task[]>('/tasks', {
-    params: { ...filter, ...pagination }
-  });
-
-  return result.data;
-};
-
-const loadTasksFx = createEffect(loadTasks);
-const loadTasksTrigger = createEvent();
+const tasksGate = createGate();
 
 sample({
   source: $tasksQuery,
-  clock: [loadTasksTrigger, nextPage, $tasksFilter],
+  clock: [tasksGate.open, nextPage, $tasksFilter],
   target: loadTasksFx
 });
 
@@ -47,6 +40,9 @@ sample({
   target: $tasks
 });
 
+$tasks.reset($tasksFilter);
+$tasks.reset(tasksGate.close);
+
 const $fetchError = createStore<string>('').on(loadTasksFx.failData, (_, error) => error.message);
 
-export { $tasks, $tasksFilter, loadTasksFx, loadTasksTrigger, nextPage };
+export { $tasks, $tasksFilter, loadTasksFx, nextPage, tasksGate };

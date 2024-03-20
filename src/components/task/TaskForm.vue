@@ -4,7 +4,7 @@ import { TASK_TAGS } from '@/lib/constants/tags';
 import { BaseButton, BaseCard, BaseGroup, BaseInput, BaseSelect, BaseTextarea } from '../ui';
 
 type FormProps = {
-  task: TaskApi.Task;
+  task: TaskApi.TaskDto;
   onSubmit: (...args: any[]) => void;
 };
 
@@ -14,15 +14,7 @@ defineProps<FormProps>();
 <template>
   <base-button class="back-btn" variant="ghost" @click="() => $router.back()">Назад</base-button>
   <base-card>
-    <form
-      class="task-form"
-      @submit.prevent="
-        () => {
-          onSubmit();
-          $router.push('/');
-        }
-      "
-    >
+    <form class="task-form" @submit.prevent="onSubmit">
       <base-group heading="Название">
         <base-input v-model="task.title" type="text" required />
       </base-group>
@@ -42,7 +34,7 @@ defineProps<FormProps>();
         <base-select multiple="true" v-model="task.taskTags">
           <option
             v-for="tag in TASK_TAGS"
-            :value="tag"
+            :value="tag.id"
             :key="tag.id"
             :selected="task.taskTags.includes(tag)"
           >
