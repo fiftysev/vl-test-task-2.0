@@ -53,7 +53,7 @@ class TaskService {
   }
 
   async find(uid: string) {
-    const task = await this.db.task.findUnique({
+    const task = await this.db.task.findUniqueOrThrow({
       where: {
         uid
       },

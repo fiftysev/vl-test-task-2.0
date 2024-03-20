@@ -1,3 +1,4 @@
+import { loadTaskFx } from '@/effector-stores/task-view.store';
 import { loadTasksTrigger } from '@/effector-stores/tasks.store';
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -14,7 +15,11 @@ const router = createRouter({
     },
     {
       path: '/task/:uid',
-      component: () => import('@/views/SingleTaskView.vue')
+      component: () => import('@/views/SingleTaskView.vue'),
+      beforeEnter(to, from, next) {
+        loadTaskFx(to.params.uid as string);
+        next();
+      }
     },
     {
       path: '/add-task',
