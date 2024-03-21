@@ -7,6 +7,7 @@ import { taskModel } from '@/effector-stores/task-view.store';
 import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant';
 
 import { BaseButton, BaseCard, BaseGroup, BaseTag } from '@/components/ui';
+import { dateFormatter } from '@/lib/format-date';
 
 const { uid } = useRoute().params;
 const router = useRouter();
@@ -16,14 +17,6 @@ const onEditClick = () => router.push(`/edit/${uid}`);
 const onDeleteClick = async () => {
   await taskModel.deleteTaskFx(uid as string);
 };
-
-const formatter = Intl.DateTimeFormat('ru', {
-  day: '2-digit',
-  month: 'long',
-  year: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit'
-});
 
 const task = useStore(taskModel.$task);
 </script>
@@ -41,7 +34,7 @@ const task = useStore(taskModel.$task);
       <p>{{ task.title }}</p>
     </base-group>
     <base-group heading="Дата создания">
-      <p>{{ formatter.format(Date.parse(task.createdAt)) }}</p>
+      <p>{{ dateFormatter.formatDateLong(task.createdAt) }}</p>
     </base-group>
     <base-group heading="Приоритет">
       <base-tag :variant="priorityTagVariantMap[task.priority]" :content="task.priority" />

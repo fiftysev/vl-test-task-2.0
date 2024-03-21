@@ -1,4 +1,4 @@
-import { taskApi } from '@/lib/api/taskApi';
+import { taskApi } from '@/lib/api/task-api';
 import router from '@/router';
 import { createEffect, createEvent, createStore, sample } from 'effector';
 

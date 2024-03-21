@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { BaseCard, BaseTag } from '@/components/ui';
 import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant.js';
+import { dateFormatter } from '@/lib/format-date';
 type TaskListItemProps = {
   task: TaskApi.Task;
 };
 
-const formatter = new Intl.DateTimeFormat('ru');
 defineProps<TaskListItemProps>();
 </script>
 
 <template>
   <base-card class="task-card" @click="() => $router.push(`/task/${task.uid}`)">
     <h2 class="heading">{{ task.title }}</h2>
-    <p>Созданa: {{ formatter.format(Date.parse(task.createdAt)) }}</p>
+    <p>Созданa: {{ dateFormatter.formatDateShort(task.createdAt) }}</p>
     <div class="row">
       <base-tag :variant="priorityTagVariantMap[task.priority]" :content="task.priority" />
       <template v-if="task.taskTags.length">
