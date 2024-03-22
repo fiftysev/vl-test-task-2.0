@@ -12,23 +12,30 @@ const TaskController = new Elysia()
   .decorate({
     taskService: new TaskService()
   })
-  .get('/tasks', async ({ taskService, query }) => await taskService.all(buildQuery(query)))
-  .get('/tasks/:uid', async ({ taskService, params }) => await taskService.find(params.uid), {
-    params: 'uid'
-  })
-  .post('/tasks', async ({ taskService, body }) => await taskService.create(body), {
-    body: 'task'
-  })
-  .patch(
-    '/tasks/:uid',
-    async ({ taskService, params, body }) => await taskService.update(params.uid, body),
-    {
-      body: 'partialTask',
-      params: 'uid'
-    }
-  )
-  .delete('/tasks/:uid', async ({ taskService, params }) => await taskService.delete(params.uid), {
-    params: 'uid'
-  });
+  .group('/tasks', (router) =>
+    router
+      .get('/', async ({ taskService, query }) => await taskService.all(buildQuery(query)))
+      .get('/:uid', async ({ taskService, params }) => await taskService.find(params.uid), {
+        params: 'uid'
+      })
+      .post('/', async ({ taskService, body }) => await taskService.create(body), {
+        body: 'task'
+      })
+      .patch(
+        '/:uid',
+        async ({ taskService, params, body }) => await taskService.update(params.uid, body),
+        {
+          body: 'partialTask',
+          params: 'uid'
+        }
+      )
+      .delete(
+        '/:uid',
+        async ({ taskService, params }) => await taskService.delete(params.uid),
+        {
+          params: 'uid'
+        }
+      )
+  );
 
 export { TaskController };
