@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { PRIORITIES } from '@/lib/constants/priority';
-import { TASK_TAGS } from '@/lib/constants/tags';
+import { tagsModel } from '@/stores/tags.store';
 import { $tasksFilter } from '@/stores/task-list.store';
-import { useVModel } from 'effector-vue/composition';
+import { useStore, useVModel } from 'effector-vue/composition';
 import { BaseCard, BaseCheckbox, BaseGroup, BaseRadioButton } from '../ui';
 
 const filters = useVModel($tasksFilter);
+
+const taskTags = useStore(tagsModel.$tags);
 </script>
 
 <template>
@@ -27,7 +29,7 @@ const filters = useVModel($tasksFilter);
     </base-group>
     <base-group heading="Отметка">
       <base-checkbox
-        v-for="tag in TASK_TAGS"
+        v-for="tag in taskTags"
         :label="tag.name"
         :key="tag.id"
         v-model="filters.tags"

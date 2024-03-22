@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PRIORITIES } from '@/lib/constants/priority';
-import { TASK_TAGS } from '@/lib/constants/tags';
+import { tagsModel } from '@/stores/tags.store';
+import { useGate, useStore } from 'effector-vue/composition';
 import { BaseButton, BaseCard, BaseGroup, BaseInput, BaseSelect, BaseTextarea } from '../ui';
 
 type FormProps = {
@@ -9,6 +10,8 @@ type FormProps = {
 };
 
 defineProps<FormProps>();
+
+const taskTags = useStore(tagsModel.$tags);
 </script>
 
 <template>
@@ -33,7 +36,7 @@ defineProps<FormProps>();
       <base-group heading="Отметки">
         <base-select multiple="true" v-model="task.taskTags">
           <option
-            v-for="tag in TASK_TAGS"
+            v-for="tag in taskTags"
             :value="tag.id"
             :key="tag.id"
             :selected="task.taskTags.includes(tag)"

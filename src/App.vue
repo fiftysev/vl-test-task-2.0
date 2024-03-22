@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { useStore } from 'effector-vue/composition';
+import { useGate, useStore } from 'effector-vue/composition';
 import { messageHandler } from './stores/message-handler';
+import { tagsModel } from './stores/tags.store';
 
 const message = useStore(messageHandler.$messages);
+
+useGate(tagsModel.tagsGate, () => 'tags');
 </script>
 
 <template>

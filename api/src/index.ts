@@ -1,6 +1,7 @@
 import cors from '@elysiajs/cors';
 import { swagger } from '@elysiajs/swagger';
 import { Elysia } from 'elysia';
+import { TagController } from './controllers/tag/tag.controller';
 import { TaskController } from './controllers/task/task.controller';
 
 const app = new Elysia()
@@ -11,6 +12,9 @@ const app = new Elysia()
   )
   .use(cors())
   .use(TaskController)
-  .listen(8080);
+  .use(TagController)
+  .listen(Bun.env.PORT ?? 8080, () =>
+    console.info(`[${new Date()}] Api started on ${Bun.env.PORT} port`)
+  );
 
 export type TaskApi = typeof app;
