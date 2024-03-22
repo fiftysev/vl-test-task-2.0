@@ -28,6 +28,8 @@ const createTaskFx = createEffect(taskApi.createTask);
 const submitCreate = createEvent();
 
 $form.reset(loadTaskFx);
+$form.reset(updateTaskFx.done);
+$form.reset(createTaskFx.done);
 
 sample({
   source: loadTaskFx.doneData,

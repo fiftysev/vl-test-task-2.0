@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { $tasksFilter } from '@/effector-stores/tasks.store';
-import { useVModel } from 'effector-vue/composition';
-import { BaseCard, BaseCheckbox, BaseGroup, BaseRadioButton } from '../ui';
 import { PRIORITIES } from '@/lib/constants/priority';
 import { TASK_TAGS } from '@/lib/constants/tags';
+import { $tasksFilter } from '@/stores/task-list.store';
+import { useVModel } from 'effector-vue/composition';
+import { BaseCard, BaseCheckbox, BaseGroup, BaseRadioButton } from '../ui';
 
 const filters = useVModel($tasksFilter);
 </script>

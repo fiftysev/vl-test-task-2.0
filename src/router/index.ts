@@ -1,5 +1,5 @@
-import { formModel } from '@/effector-stores/task-form.store';
-import { taskModel } from '@/effector-stores/task-view.store';
+import { formModel } from '@/stores/task-form.store';
+import { taskModel } from '@/stores/task-view.store';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({

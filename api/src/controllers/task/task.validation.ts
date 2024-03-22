@@ -3,7 +3,7 @@ import { Static, t } from 'elysia';
 const TaskBody = t.Object({
   title: t.String({
     minLength: 3,
-    error: 'Название задачи должно быть не меньше 3 символов.'
+    error: 'Название задачи должно быть не менее 3 символов'
   }),
   description: t.Optional(t.String()),
   priority: t.String({

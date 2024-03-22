@@ -2,7 +2,7 @@
 import { useStore } from 'effector-vue/composition';
 import { useRoute, useRouter } from 'vue-router';
 
-import { taskModel } from '@/effector-stores/task-view.store';
+import { taskModel } from '@/stores/task-view.store';
 
 import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant';
 

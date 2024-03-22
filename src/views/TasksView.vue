@@ -4,7 +4,7 @@ import { BaseButton } from '@/components/ui';
 import TaskFilterPanel from '@/components/task/TaskFilterPanel.vue';
 import TaskList from '@/components/task/TaskList/TaskList.vue';
 
-import { $tasks, nextPage, tasksGate } from '@/effector-stores/tasks.store';
+import { $tasks, nextPage, tasksGate } from '@/stores/task-list.store';
 import { useGate, useStore } from 'effector-vue/composition';
 import { onMounted, onUnmounted } from 'vue';
 
