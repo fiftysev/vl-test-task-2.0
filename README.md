@@ -1,10 +1,13 @@
 # Тестовое задание на практику (frontend)
 
-==API реализован с использованием ElysiaJS, для запуска нужна среда [Bun](https://bun.sh/)==
+> [!IMPORTANT]
+> API реализован с использованием [Elysia](https://elysiajs.com/), для запуска нужна среда [Bun](https://bun.sh/)
+
 
 ## Для запуска фронтенда
 ```bash
 yarn
+cp .env.example .env
 yarn dev
 ```
 
@@ -12,6 +15,7 @@ yarn dev
 ```bash
 cd api
 bun
+cp .env.example .env
 bunx prisma migrate
 bun run dev
 ```
