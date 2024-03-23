@@ -1,7 +1,7 @@
 import { combine, createEffect, createEvent, createStore, sample } from 'effector';
+import { createGate } from 'effector-vue/composition';
 
 import { taskApi } from '@/lib/api/task-api';
-import { createGate } from 'effector-vue/composition';
 
 const $tasksFilter = createStore<TaskApi.TasksFilter>({
   sort: 'desc',

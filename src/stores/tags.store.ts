@@ -1,6 +1,7 @@
-import { tagsApi } from '@/lib/api/tags-api';
 import { createEffect, createStore, sample } from 'effector';
 import { createGate } from 'effector-vue/composition';
+
+import { tagsApi } from '@/lib/api/tags-api';
 
 const $tags = createStore<TaskApi.TaskTag[]>([]);
 const loadTagsFx = createEffect(tagsApi.getAllTags);

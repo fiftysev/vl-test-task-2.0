@@ -1,15 +1,7 @@
-import { taskApi } from '@/lib/api/task-api';
-import router from '@/router';
 import { createEffect, createEvent, createStore, sample } from 'effector';
+import router from '@/router';
 
-const initialState: TaskApi.Task = {
-  uid: '',
-  title: '',
-  description: '',
-  createdAt: new Date().toISOString(),
-  priority: 'Low',
-  taskTags: []
-};
+import { taskApi } from '@/lib/api/task-api';
 
 const $task = createStore<TaskApi.Task | null>(null);
 

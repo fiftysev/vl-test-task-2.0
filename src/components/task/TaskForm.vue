@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { useStore } from 'effector-vue/composition';
+
 import { PRIORITIES } from '@/lib/constants/priority';
+
 import { tagsModel } from '@/stores/tags.store';
-import { useGate, useStore } from 'effector-vue/composition';
+
 import { BaseButton, BaseCard, BaseGroup, BaseInput, BaseSelect, BaseTextarea } from '../ui';
 
 type FormProps = {

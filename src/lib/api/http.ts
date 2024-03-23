@@ -1,5 +1,6 @@
-import { messageHandler } from '@/stores/message-handler';
 import axios, { AxiosError } from 'axios';
+
+import { messageHandler } from '@/stores/message-handler';
 
 const BASE_URL = import.meta.env.VITE_API_URL as string;
 

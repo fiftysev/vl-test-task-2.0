@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { BaseCard, BaseTag } from '@/components/ui';
-import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant.js';
+import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant';
 import { dateFormatter } from '@/lib/format-date';
+
+import { BaseCard, BaseTag } from '@/components/ui';
+
 type TaskListItemProps = {
   task: TaskApi.Task;
 };

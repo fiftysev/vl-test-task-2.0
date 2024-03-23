@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { BaseButton } from '@/components/ui';
+import { onMounted, onUnmounted } from 'vue';
+import { useGate, useStore } from 'effector-vue/composition';
+
+import { $tasks, nextPage, tasksGate } from '@/stores/task-list.store';
 
 import TaskFilterPanel from '@/components/task/TaskFilterPanel.vue';
 import TaskList from '@/components/task/TaskList/TaskList.vue';
 
-import { $tasks, nextPage, tasksGate } from '@/stores/task-list.store';
-import { useGate, useStore } from 'effector-vue/composition';
-import { onMounted, onUnmounted } from 'vue';
+import { BaseButton } from '@/components/ui';
+
 
 const store = useStore($tasks);
 

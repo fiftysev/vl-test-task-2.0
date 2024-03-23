@@ -1,6 +1,7 @@
-import { taskApi } from '@/lib/api/task-api';
-import router from '@/router';
 import { createEffect, createEvent, createStore, sample } from 'effector';
+import router from '@/router';
+
+import { taskApi } from '@/lib/api/task-api';
 
 const initialState: TaskApi.TaskDto = {
   title: '',

@@ -1,6 +1,7 @@
+import { createRouter, createWebHistory } from 'vue-router';
+
 import { formModel } from '@/stores/task-form.store';
 import { taskModel } from '@/stores/task-view.store';
-import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

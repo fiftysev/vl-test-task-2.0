@@ -5,9 +5,9 @@ import { useRoute, useRouter } from 'vue-router';
 import { taskModel } from '@/stores/task-view.store';
 
 import { priorityTagVariantMap } from '@/lib/constants/priority-tag-variant';
+import { dateFormatter } from '@/lib/format-date';
 
 import { BaseButton, BaseCard, BaseGroup, BaseTag } from '@/components/ui';
-import { dateFormatter } from '@/lib/format-date';
 
 const { uid } = useRoute().params;
 const router = useRouter();
