@@ -13,8 +13,8 @@ const app = new Elysia()
   .use(cors())
   .use(TaskController)
   .use(TagController)
-  .listen(Bun.env.PORT ?? 8080, () =>
-    console.info(`[${new Date()}] Api started on ${Bun.env.PORT} port`)
-  );
+  .listen(Bun.env.PORT ?? 8080, () => {
+    console.info(`[${new Date()}] Api started on ${Bun.env.PORT} port`);
+  });
 
 export type TaskApi = typeof app;

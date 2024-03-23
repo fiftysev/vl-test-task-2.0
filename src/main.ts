@@ -8,7 +8,4 @@ import './assets/main.scss';
 const app = createApp(App);
 
 app.use(router);
-
-console.log(import.meta.env)
-
 app.mount('#app');

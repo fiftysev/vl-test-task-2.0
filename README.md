@@ -1,33 +1,26 @@
 # Тестовое задание на практику (frontend)
 
-Приложение доступно по [ссылке](https://vl-test-task.vercel.app/)
+==API реализован с использованием ElysiaJS, для запуска нужна среда [Bun](https://bun.sh/)==
 
-## Project Setup
-
-```sh
+## Для запуска фронтенда
+```bash
 yarn
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 yarn dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-yarn build
+## Для запуска API
+```bash
+cd api
+bun
+bunx prisma migrate
+bun run dev
 ```
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-yarn lint
-```
+Документация API доступна по адресу: `http://<host>:<port>/swagger`
 
 ## Выполнено:
 - [X] Подгрузка задач частями (Intersection Observer)
-- [X] CRUD на клиенте (Pinia)
+- [X] CRUD на клиенте (Effector)
 - [X] Сортировка по дате создания
 - [X] Фильтрация по приоритету и отметкам
+- [X] Elysia + Prisma CRUD API

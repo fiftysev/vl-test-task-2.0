@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
+    "api": "cd api && bun run dev",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "test:unit": "vitest",
@@ -18,7 +19,6 @@
     "axios": "^1.6.8",
     "effector": "^23.2.0",
     "effector-vue": "^23.0.0",
-    "pinia": "^2.0.32",
     "uid": "^2.0.2",
     "vue": "^3.4.21",
     "vue-router": "^4.1.6"

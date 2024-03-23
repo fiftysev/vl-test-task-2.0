@@ -1,7 +1,7 @@
 import { messageHandler } from '@/stores/message-handler';
 import axios, { AxiosError } from 'axios';
 
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = import.meta.env.VITE_API_URL as string;
 
 export const $http = axios.create({
   baseURL: BASE_URL,
