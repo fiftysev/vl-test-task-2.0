@@ -14,10 +14,10 @@ yarn dev
 ## Для запуска API
 ```bash
 cd api
-bun
+bun install
 cp .env.example .env
-bunx prisma migrate
-bun run dev
+bun init-db
+bun dev
 ```
 
 Документация API доступна по адресу: `http://<host>:<port>/swagger`

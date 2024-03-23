@@ -3,7 +3,10 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "migrate": "bunx prisma migrate dev",
+    "seed": "bun run prisma/task.seed.ts",
+    "init-db": "bun run migrate && bun run seed"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.0.0",
