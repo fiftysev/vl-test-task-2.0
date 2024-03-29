@@ -45,4 +45,4 @@ $tasks.reset(tasksGate.close);
 
 const $fetchError = createStore<string>('').on(loadTasksFx.failData, (_, error) => error.message);
 
-export { $tasks, $tasksFilter, loadTasksFx, nextPage, tasksGate };
+export const taskListModel = { $tasks, $tasksFilter, loadTasksFx, nextPage, tasksGate };

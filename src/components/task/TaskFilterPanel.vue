@@ -4,11 +4,11 @@ import { useStore, useVModel } from 'effector-vue/composition';
 import { PRIORITIES } from '@/lib/constants/priority';
 
 import { tagsModel } from '@/stores/tags.store';
-import { $tasksFilter } from '@/stores/task-list.store';
+import { taskListModel } from '@/stores/task-list.store';
 
 import { BaseCard, BaseCheckbox, BaseGroup, BaseRadioButton } from '../ui';
 
-const filters = useVModel($tasksFilter);
+const filters = useVModel(taskListModel.$tasksFilter);
 
 const taskTags = useStore(tagsModel.$tags);
 </script>
